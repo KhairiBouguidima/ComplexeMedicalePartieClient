@@ -27,9 +27,6 @@ const PatientDashboard = () => {
 
   const userId = localStorage.getItem("userId");
 
-  useEffect(() => {
-    if (userId) fetchData();
-  }, [userId,fetchData]);
 
  // 1. Wrap the function in useCallback
 const fetchData = useCallback(async () => {
@@ -61,7 +58,13 @@ const fetchData = useCallback(async () => {
   } finally {
     setLoading(false);
   }
-}, [userId]); // 2. Add userId as the only dependency here
+}, [userId]);
+ 
+useEffect(() => {
+    if (userId) fetchData();
+  }, [userId,fetchData]);
+
+  // 2. Add userId as the only dependency here
 
 // 3. Update your useEffect to look like this
 useEffect(() => {
