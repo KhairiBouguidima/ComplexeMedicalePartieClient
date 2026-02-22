@@ -1,0 +1,110 @@
+.NavbarContainer {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background-color: rgba(2, 6, 23, 0.8); /* Semi-transparent Slate 950 */
+    backdrop-filter: blur(12px); /* Blur effect */
+    border-bottom: 1px solid #1e293b; /* Slate 800 */
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* Logo Styling */
+.NavLogo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.LogoBox {
+    width: 28px;
+    height: 28px;
+    background-color: #2563eb;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LogoDot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.BrandName {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+/* Navigation & Buttons */
+.NavLinks {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.NavLinkItem {
+    text-decoration: none;
+    color: #94a3b8; /* Slate 400 */
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.NavLinkItem:hover, .NavLinkItem.active {
+    color: white;
+}
+
+.NavActions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Login Style (Ghost Button) */
+.btn-login {
+    text-decoration: none;
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Register Style (Primary Blue) */
+.btn-register {
+    text-decoration: none;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-register:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .NavLinkItem { display: none; } /* Hide home link on mobile */
+    .BrandName { font-size: 1.1rem; }
+}
