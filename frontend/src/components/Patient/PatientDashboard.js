@@ -29,7 +29,7 @@ const PatientDashboard = () => {
 
   useEffect(() => {
     if (userId) fetchData();
-  }, [userId]);
+  }, [userId,fetchData()]);
 
   const fetchData = async () => {
     setLoading(true);

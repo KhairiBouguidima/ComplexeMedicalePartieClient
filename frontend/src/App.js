@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, BrowserRouter, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, BrowserRouter, Route, Navigate } from 'react-router-dom';
 import Register from "./components/auth/register/Register";
 import Login from "./components/auth/login/Login";
 import NotFound from "./components/auth/NotFound/NotFound";
