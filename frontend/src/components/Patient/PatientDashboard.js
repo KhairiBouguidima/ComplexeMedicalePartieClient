@@ -29,38 +29,46 @@ const PatientDashboard = () => {
 
   useEffect(() => {
     if (userId) fetchData();
-  }, [userId,fetchData()]);
+  }, [userId,fetchData]);
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [profileRes, apptRes, docsRes, invRes] = await Promise.all([
-        apiRequest(`/patient/my-profile/${userId}`),
-        apiRequest(`/patient/appointments/${userId}`),
-        apiRequest(`/doctors/list`),
-        apiRequest(`/patient/invoices/${userId}`) // Fetching invoices
-      ]);
+ // 1. Wrap the function in useCallback
+const fetchData = useCallback(async () => {
+  setLoading(true);
+  try {
+    const [profileRes, apptRes, docsRes, invRes] = await Promise.all([
+      apiRequest(`/patient/my-profile/${userId}`),
+      apiRequest(`/patient/appointments/${userId}`),
+      apiRequest(`/doctors/list`),
+      apiRequest(`/patient/invoices/${userId}`)
+    ]);
 
-      if (profileRes.status === "success") {
-        setProfile(profileRes.data);
-        setFormData({
-          username: profileRes.data.info.username || '',
-          Telephone: profileRes.data.info.telephone || '',
-          address: profileRes.data.info.address || '',
-          city: profileRes.data.info.city || '',
-          state: profileRes.data.info.state || ''
-        });
-        setResetData(prev => ({ ...prev, email: profileRes.data.info.email || '' }));
-      }
-      if (apptRes.status === "success") setAppointments(apptRes.data);
-      if (docsRes.status === "success") setDoctors(docsRes.data);
-      if (invRes.status === "success") setInvoices(invRes.data);
-    } catch (err) {
-      console.error("Failed to fetch dashboard data");
-    } finally {
-      setLoading(false);
+    if (profileRes.status === "success") {
+      setProfile(profileRes.data);
+      setFormData({
+        username: profileRes.data.info.username || '',
+        Telephone: profileRes.data.info.telephone || '',
+        address: profileRes.data.info.address || '',
+        city: profileRes.data.info.city || '',
+        state: profileRes.data.info.state || ''
+      });
+      setResetData(prev => ({ ...prev, email: profileRes.data.info.email || '' }));
     }
-  };
+    if (apptRes.status === "success") setAppointments(apptRes.data);
+    if (docsRes.status === "success") setDoctors(docsRes.data);
+    if (invRes.status === "success") setInvoices(invRes.data);
+  } catch (err) {
+    console.error("Failed to fetch dashboard data");
+  } finally {
+    setLoading(false);
+  }
+}, [userId]); // 2. Add userId as the only dependency here
+
+// 3. Update your useEffect to look like this
+useEffect(() => {
+  if (userId) {
+    fetchData(); 
+  }
+}, [userId, fetchData]); // No parentheses after fetchData!
 
   const handleBookSubmit = async (e) => {
     e.preventDefault();
